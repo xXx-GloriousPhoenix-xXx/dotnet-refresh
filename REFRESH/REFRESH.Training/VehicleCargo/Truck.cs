@@ -43,16 +43,16 @@ public sealed class Truck(
     /// <param name="cargoList">List of cargo</param>
     /// <returns>List on unloaded cargo</returns>
     /// <exception cref="InvalidOperationException">Throws exception if cargo list is empty</exception>
-    public IEnumerable<Cargo> Load(Cargo[] cargoList)
+    public IEnumerable<Cargo> Load(IList<Cargo> cargoList)
     {
-        if (cargoList.Length == 0)
+        if (cargoList.Count == 0)
         {
             throw new InvalidOperationException("Cargo list is empty");
         }
 
         var i = 0;
         var skippedCargo = new List<Cargo>();
-        while (i < cargoList.Length)
+        while (i < cargoList.Count)
         {
             if (AvailableCargoWeightInKg < cargoList[i].WeightInKg)
             {
@@ -72,14 +72,14 @@ public sealed class Truck(
     /// </summary>
     /// <param name="cargo"></param>
     /// <exception cref="InvalidOperationException">Throws exception if cargo is not present in storage</exception>
-    public void Unload(Cargo cargo)
+    public bool Unload(Cargo cargo)
     {
         if (!_storage.Contains(cargo))
         {
             throw new InvalidOperationException("Cargo is not present in storage");
         }
 
-        _storage.Remove(cargo);
+        return _storage.Remove(cargo);
     }
 
     /// <summary>
