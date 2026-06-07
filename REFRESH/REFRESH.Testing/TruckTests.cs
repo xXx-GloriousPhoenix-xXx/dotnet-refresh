@@ -9,7 +9,7 @@ public class TruckTests
     public void LoadSingleCargo_WithValidWeight_AddsToStorage()
     {
         // Arrange
-        var truck = new Truck("MAN", 500D, 2D, 150_000D, 0.8D);
+        var truck = new Truck("MAN", 500D, 2D, 150_000, 0.8D);
         var cargoWeight = 1000D;
         var cargo = new Cargo(cargoWeight);
 
@@ -24,7 +24,7 @@ public class TruckTests
     public void LoadSingleCargo_WithOverweight_ThrowsOverloadException()
     {
         // Arrange
-        var truck = new Truck("MAN", 500D, 2D, 150_000D, 0.8D);
+        var truck = new Truck("MAN", 500D, 2D, 150_000, 0.8D);
         var cargo = new Cargo(200_000D);
 
         // Act
@@ -38,7 +38,7 @@ public class TruckTests
     public void LoadMultipleCargo_WithExceedingWeight_AddsOnlyFittingCargo()
     {
         // Arrange
-        var truck = new Truck("MAN", 500D, 2D, 150_000D, 0.8D);
+        var truck = new Truck("MAN", 500D, 2D, 150_000, 0.8D);
         var testingWeight = 145_000D;
         var extraCargo = new Cargo(100_000D);
         var cargoList = new List<Cargo>()
@@ -61,7 +61,7 @@ public class TruckTests
     public void LoadMultipleCargo_WithEmptyArray_ThrowsInvalidOperationException()
     {
         // Arrange
-        var truck = new Truck("MAN", 500D, 2D, 150_000D, 0.8D);
+        var truck = new Truck("MAN", 500D, 2D, 150_000, 0.8D);
         var cargoList = new List<Cargo>();
 
         // Act
@@ -77,7 +77,7 @@ public class TruckTests
     public void UnloadCargo_WithExistingCargo_ReturnsTrue()
     {
         // Arrange
-        var truck = new Truck("MAN", 500D, 2D, 150_000D, 0.8D);
+        var truck = new Truck("MAN", 500D, 2D, 150_000, 0.8D);
         var cargo = new Cargo(1000D);
 
         // Act
@@ -92,7 +92,7 @@ public class TruckTests
     public void UnloadCargo_WithInexistingCargo_ThrowsInvalidOperationException()
     {
         // Arrange
-        var truck = new Truck("MAN", 500D, 2D, 150_000D, 0.8D);
+        var truck = new Truck("MAN", 500D, 2D, 150_000, 0.8D);
         var cargo = new Cargo(1000D);
 
         // Act
@@ -116,7 +116,7 @@ public class TruckTests
         var remainingFuel = 10;
         var initialFuel = testFuelSpent + remainingFuel;
 
-        var truck = new Truck("MAN", 500D, fuelConsumptionPerKm, 150_000D, extraConsumptionPerKg);
+        var truck = new Truck("MAN", 500D, fuelConsumptionPerKm, 150_000, extraConsumptionPerKg);
         truck.Load(new Cargo(cargoWeight));
         truck.Refuel(initialFuel);
 
@@ -140,7 +140,7 @@ public class TruckTests
         var insufficientFuel = 10;
         var initialFuel = testFuelSpent - insufficientFuel;
 
-        var truck = new Truck("MAN", 500D, fuelConsumptionPerKm, 150_000D, extraConsumptionPerKg);
+        var truck = new Truck("MAN", 500D, fuelConsumptionPerKm, 150_000, extraConsumptionPerKg);
         truck.Load(new Cargo(cargoWeight));
         truck.Refuel(initialFuel);
 
