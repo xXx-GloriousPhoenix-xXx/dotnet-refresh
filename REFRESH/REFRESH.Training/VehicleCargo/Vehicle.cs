@@ -6,6 +6,8 @@ public class Vehicle(string brand, double tankCapacity, double fuelConsumptionPe
     protected double _fuelLevel = 0D;
     protected readonly double _fuelConsumptionPerKm = fuelConsumptionPerKm;
     protected int _kmDriven = 0;
+    public double FuelLevel => _fuelLevel;
+    public int KmDriven => _kmDriven;
 
     /// <summary>
     /// Refuels car tank
