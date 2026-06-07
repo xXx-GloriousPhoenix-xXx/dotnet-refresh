@@ -10,6 +10,17 @@ public sealed class Truck(
     private readonly List<Cargo> _storage = [];
     public double TotalCargoWeightInKg => _storage.Sum(c => c.WeightInKg);
     public double AvailableCargoWeightInKg => _maxCargoWeightInKg - TotalCargoWeightInKg;
+    private const int TIME_IN_MS_PER_KM = 100;
+
+    /// <summary>
+    /// Returns required amount of fuel for a ride
+    /// </summary>
+    /// <param name="distanceKm">Distance of ride in km</param>
+    /// <returns>Required amount of fuel for a ride</returns>
+    public double GetRequiredFuel(int distanceKm)
+    {
+        return distanceKm * (_fuelConsumptionPerKm + _extraConsumptionPerKg * TotalCargoWeightInKg);
+    }
 
     /// <summary>
     /// Adds cargo to the vehicle storage
@@ -24,6 +35,36 @@ public sealed class Truck(
         }
 
         _storage.Add(cargo);
+    }
+
+    /// <summary>
+    /// Loads cargo in case of sufficient space
+    /// </summary>
+    /// <param name="cargoList">List of cargo</param>
+    /// <returns>List on unloaded cargo</returns>
+    /// <exception cref="InvalidOperationException">Throws exception if cargo list is empty</exception>
+    public IEnumerable<Cargo> Load(Cargo[] cargoList)
+    {
+        if (cargoList.Length == 0)
+        {
+            throw new InvalidOperationException("Cargo list is empty");
+        }
+
+        var i = 0;
+        var skippedCargo = new List<Cargo>();
+        while (i < cargoList.Length)
+        {
+            if (AvailableCargoWeightInKg < cargoList[i].WeightInKg)
+            {
+                skippedCargo.Add(cargoList[i++]);
+            }
+            else
+            {
+                _storage.Add(cargoList[i]);
+            }
+        }
+
+        return skippedCargo;
     }
 
     /// <summary>
@@ -56,5 +97,40 @@ public sealed class Truck(
 
         _kmDriven += km;
         _fuelLevel -= requiredFuel;
+    }
+
+    /// <summary>
+    /// Performs delivery asynchronously
+    /// </summary>
+    /// <param name="distanceKm">Distance of delivery in km</param>
+    /// <param name="ct">Token to cancel delivery</param>
+    /// <returns></returns>
+    /// <exception cref="InsufficientFuelException">Throws exception if delivery is failed</exception>
+    public async Task DeliverAsync(int distanceKm, CancellationToken ct = default)
+    {
+        var requiredFuel = GetRequiredFuel(distanceKm);
+        if (requiredFuel > _fuelLevel)
+        {
+            throw new InsufficientFuelException(_fuelLevel, requiredFuel);
+        }
+
+        var totalDrivenInKm = 0;
+        try
+        {
+            for (var i = 0; i < distanceKm; i++)
+            {
+                ct.ThrowIfCancellationRequested();
+
+                await Task.Delay(TIME_IN_MS_PER_KM, ct);
+                Drive(1);
+                totalDrivenInKm += 1;
+            }
+
+            _kmDriven += distanceKm;
+        }
+        catch (OperationCanceledException)
+        {
+            _kmDriven += 2 * totalDrivenInKm;
+        }
     }
 }
