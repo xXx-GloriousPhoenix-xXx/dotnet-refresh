@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="REFRESH.GoF/REFRESH.GoF.csproj" Id="19a2100a-316a-44bb-ba1d-42d18a347024" />
   <Project Path="REFRESH.Testing/REFRESH.Testing.csproj" Id="03eea614-e428-4097-b5bf-40456cbbc5f3" />
   <Project Path="REFRESH.Training/REFRESH.Training.csproj" />
 </Solution>
