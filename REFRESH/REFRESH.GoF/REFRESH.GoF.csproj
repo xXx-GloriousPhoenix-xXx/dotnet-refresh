@@ -18,7 +18,6 @@
     <Folder Include="Behavioral\08_Strategy\" />
     <Folder Include="Behavioral\09_TemplateMethod\" />
     <Folder Include="Behavioral\10_Visitor\" />
-    <Folder Include="Structural\01_Adapter\" />
     <Folder Include="Structural\02_Bridge\" />
     <Folder Include="Structural\03_Composite\" />
     <Folder Include="Structural\04_Decorator\" />
