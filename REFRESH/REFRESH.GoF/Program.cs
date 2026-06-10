@@ -1,5 +1,21 @@
-﻿using REFRESH.GoF.Structural._02_Bridge;
+﻿using REFRESH.GoF.Structural._04_Decorator;
 
-var tv = new TV();
-var remote = new AdvancedRemote(tv);
-remote.Mute();
+const bool facebookEnabled = true;
+const bool slackEnabled = true;
+const bool smsEnabled = true;
+
+var stack = new Notifier();
+if (smsEnabled)
+{
+    stack = new SMSDecorator(stack);
+}
+if (facebookEnabled)
+{
+    stack = new FacebookDecorator(stack);
+}
+if (slackEnabled)
+{
+    stack = new SlackDecorator(stack);
+}
+
+stack.SendMessage("Hi yall");

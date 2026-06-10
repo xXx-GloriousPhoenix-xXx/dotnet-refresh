@@ -18,8 +18,6 @@
     <Folder Include="Behavioral\08_Strategy\" />
     <Folder Include="Behavioral\09_TemplateMethod\" />
     <Folder Include="Behavioral\10_Visitor\" />
-    <Folder Include="Structural\03_Composite\" />
-    <Folder Include="Structural\04_Decorator\" />
     <Folder Include="Structural\05_Facade\" />
     <Folder Include="Structural\06_Flyweight\" />
     <Folder Include="Structural\07_Proxy\" />
