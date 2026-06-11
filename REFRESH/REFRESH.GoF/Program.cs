@@ -1,22 +1,18 @@
-﻿using REFRESH.GoF.Structural._06_Flyweight;
+﻿using REFRESH.GoF.Behavioral._01_ChainOfResponsibility;
 
-var canvas = new Canvas();
+var dialog = new Dialog(null, "https://wiki.com/main");
 
-var u1 = new Unit(new(0, 0));
-var u2 = new Unit(new(500, 500));
+var panel = new Panel("Help on control panel");
+dialog.AddChild(panel);
 
-u1.FireAt(u2);
+var button = new Button(null);
+panel.AddChild(button);
 
-foreach (var movingParticle in Game.MPS)
-{
-    movingParticle.Move();
-}
+button.ShowHelp();
 
-u2.FireAt(u1);
+var emptyPanel = new Panel(null);
+var okButton = new Button(null);
+dialog.AddChild(emptyPanel);
+emptyPanel.AddChild(okButton);
 
-foreach (var movingParticle in Game.MPS)
-{
-    movingParticle.Move();
-}
-
-Game.Draw(canvas);
+okButton.ShowHelp();

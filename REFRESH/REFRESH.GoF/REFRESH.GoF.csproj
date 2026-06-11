@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Behavioral\01_ChainOfResponsibility\" />
     <Folder Include="Behavioral\02_Command\" />
     <Folder Include="Behavioral\03_Iterator\" />
     <Folder Include="Behavioral\04_Mediator\" />
@@ -18,7 +17,6 @@
     <Folder Include="Behavioral\08_Strategy\" />
     <Folder Include="Behavioral\09_TemplateMethod\" />
     <Folder Include="Behavioral\10_Visitor\" />
-    <Folder Include="Structural\07_Proxy\" />
   </ItemGroup>
 
 </Project>
