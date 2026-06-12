@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Behavioral\02_Command\" />
     <Folder Include="Behavioral\03_Iterator\" />
     <Folder Include="Behavioral\04_Mediator\" />
     <Folder Include="Behavioral\05_Memento\" />
