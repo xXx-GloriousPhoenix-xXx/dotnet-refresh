@@ -2,8 +2,20 @@
 
 public class PaymentProcessor
 {
-    public static void Execute(IPaymentMethod method, double amount)
+    private IPaymentMethod? _method;
+
+    public void SetStrategy(IPaymentMethod method)
     {
-        method.ProcessPayment(amount);
+        _method = method;
+    }
+
+    public void Execute(double amount)
+    {
+        if (_method is null)
+        {
+            throw new InvalidOperationException("Payment method is not selected");
+        }
+        
+        _method.ProcessPayment(amount);
     }
 }

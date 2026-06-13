@@ -2,10 +2,10 @@
 
 public sealed class Truck(
     string brand, double tankCapacity, double fuelConsumptionPerKm,
-    double maxCargoWeightInKg, double extraConsumptionPerKg)
-    : Vehicle(brand, tankCapacity, fuelConsumptionPerKm)
+    int maxCargoWeightInKg, double extraConsumptionPerKg)
+    : Vehicle(brand, tankCapacity, fuelConsumptionPerKm), IVehicle
 {
-    private readonly double _maxCargoWeightInKg = maxCargoWeightInKg;
+    private readonly int _maxCargoWeightInKg = maxCargoWeightInKg;
     private readonly double _extraConsumptionPerKg = extraConsumptionPerKg;
     private readonly List<Cargo> _storage = [];
     public double TotalCargoWeightInKg => _storage.Sum(c => c.WeightInKg);
