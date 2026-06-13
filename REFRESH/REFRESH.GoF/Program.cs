@@ -1,12 +1,9 @@
-﻿using REFRESH.GoF.Behavioral._08_Strategy;
+﻿using REFRESH.GoF.Behavioral._10_Visitor;
 
-var navigator = new Navigator();
-navigator.SetStrategy(new RoadStrategy());
-var a = new RouteNode(1, 1);
-var b = new RouteNode(5, 5);
-var path = navigator.BuildRoute(a, b);
-while (path != null)
-{
-    Console.WriteLine(path.Position);
-    path = path.Next;
-}
+var app = new Application(new XMLExportVisitor());
+var shape = new CompoundShape();
+shape.Add(new Dot());
+shape.Add(new Circle());
+shape.Add(new Rectangle());
+app.Add(shape);
+app.Export();
